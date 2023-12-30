@@ -1,0 +1,76 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+bool isPrime(int n)
+{
+    int d;
+
+    if(n < 2)
+    {
+        return false;
+    }
+    if(n == 2)
+    {
+        return true;
+    }
+    if(n == 3)
+    {
+        return true;
+    }
+    if(n % 2 == 0)
+    {
+        return false;
+    }
+    if(n % 3 == 0)
+    {
+        return false;
+    }
+    for(d = 5; d * d <= n; d += 6)
+    {
+        if(n % d == 0 or n % (d + 2) == 0)
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+long long n, m, mat[1001][1001], i, j, k;
+
+int main()
+{
+    cin >> n >> m;
+    
+    for(i = 1; i <= n; i ++)
+    {
+        for(j = 1; j <= m; j ++)
+        {
+            cin >> mat[i][j];
+        }
+    }
+    
+    for(i = 1; i <= n; i ++)
+    {
+        if(isPrime(mat[i][1]) == true)
+        {
+            for(j = 1, k = m; j <= k; j ++, k --)
+            {
+                swap(mat[i][j], mat[i][k]);
+            }
+        }
+    }
+    
+    for(i = 1; i <= n; i ++)
+    {
+        for(j = 1; j <= m; j ++)
+        {
+            cout << mat[i][j] << " ";
+        }
+        
+        cout << '\n';
+    }
+
+    return 0;
+}
